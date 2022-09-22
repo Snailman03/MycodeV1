@@ -13,7 +13,11 @@ print('Введите исходные данные \n ')
 
 def input_check(text, limit):
 	while True:
-		value = float(input(text))
+		try:
+			value = float(input(text))
+		except ValueError:
+			print("Вы ввели хрень ")
+			continue
 		if( value>limit ): 
 			break
 		print('Ввели неправильное значение, Значение должно быть больше', limit)
@@ -41,6 +45,7 @@ def rub(val1):
 def kop(val2):
 	tr = int(val2)
 	k = int(round(val2 % tr  * 100, 2))
+	# k = int(round((val2 % 1)  * 100, 2))
 	return k
 
 # Рассчитаем с учетом капитализации и запишем в файл
@@ -51,6 +56,8 @@ file3.write('\nМесяц   |  Сумма вклада         |  Процент
 
 
 for i in range(1,(int(srok)+1)):
+    #Не определять отдельные переменные для рублей и копеек и в момент вывода их 
+    #
     dohod_i = summ * stavka/100/12
     dohod_ir = rub(dohod_i)
     dohod_ik = kop(dohod_i)
